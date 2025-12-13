@@ -3,9 +3,10 @@ import './CSS/Entry.css'
 import sonic from './assets/EasterEgg/sonic.gif'
 import { motion } from "framer-motion";
 
-function importImagesFrom(folder) {
+export function importImagesFrom(folder) {
   const all = {
     BackGround: import.meta.glob('/src/assets/BackGround/*.{jpg,png,jpeg}', {eager: true}),
+    IconTools: import.meta.glob('/src/assets/IconTools/*.{jpg,png,jpeg,svg,gif}', { eager: true }),
   };
   const images = all[folder] || {};
   return Object.values(images).map((modules) => modules.default);
@@ -47,7 +48,6 @@ export default function Entry() {
   useEffect(() => {
     const invertal = setInterval(() => {
       setRun(!run);
-      console.log(run);
     }, 10000)
     return () => clearInterval(invertal);
   });
@@ -80,7 +80,7 @@ export default function Entry() {
         {tekst.map((t, i) => (
           <motion.h1
           key = {i}
-          initial={{ opacity: 0, y: 250, scale: 0.9 }}
+          initial={{ opacity: 0 , y: 250, scale: 0.9 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           transition={{ delay: i * 0.3, duration: 1, ease: "easeOut" }}
           >

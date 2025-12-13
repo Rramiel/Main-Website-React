@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react'
 import { motion } from "framer-motion"
 import './CSS/Content.css'
+import { importImagesFrom } from './Entry.jsx'
+// import { div } from 'framer-motion/client';
 
 export default function Content() {
+  const images = importImagesFrom('IconTools');
+
   const tekst = [
     "Programowaniem zajmuję się od ponad dwóch lat. Tworzę wysokiej jakości, responsywne i zoptymalizowane strony.",
     "Mam duże doświadczenie i nieustannie poszerzam swoją wiedzę.",
@@ -10,9 +14,9 @@ export default function Content() {
 
   return (
     <>
-    <main>
+    <div className='mainContent'>
       {<motion.div
-        className='blok'
+        className='omnie'
         initial={{ opacity: 0, y:20 }}
         whileInView={{ opacity: 1, y:0 }}
         transition={{ duration: 0.5 }}
@@ -33,7 +37,22 @@ export default function Content() {
           ))}
       <p style={{ fontWeight: "bold" }}>HTML, CSS, JavaScript i PHP</p>
       </motion.div>}
-    </main>
+      <div className='znaczniki'>
+          <div className='przesuwacz'>
+            {images.map((src, i) => (
+              <div className='znacznik' key={i}>
+                <img src={src} alt="" />
+              </div>
+            ))}
+            {images.map((src, i) => (
+              <div className='znacznik' key={i}>
+                <img src={src} alt="" />
+              </div>
+            ))}
+          </div>
+      </div>
+    </div>
+    <div className='web'></div>
     </>
   )
 }
