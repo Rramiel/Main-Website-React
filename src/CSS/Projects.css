@@ -1,0 +1,203 @@
+.projektyDev {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 70%;
+  background-color: var(--glowny);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.obraz {
+  position: relative;
+  height: 90%;
+  left: 20%;
+  align-self: flex-end;
+  z-index: 1;
+  -webkit-user-drag: none;
+}
+.tlo {
+  position: absolute;
+  display: flex;
+  width: 120%;
+  height: 70%;
+  overflow: hidden;
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  transform: rotate(3deg);
+  left: -10%;
+}
+.tlo-obraz {
+  position: absolute;
+  /* background: url("/BagroundNight.png"); */
+  /* background-size: cover;
+  background-position: center; */
+  width: 100%;
+  height: 100%;
+  filter: blur(5px);
+  z-index: 1;
+  overflow: hidden;
+}
+.tlo-obraz::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+}
+.tlo-gradient {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+}
+.postep {
+  position: absolute;
+  width: 100%;
+  height: 5%;
+  bottom: 0.1%;
+  align-self: flex-end;
+  background: linear-gradient(to right, white 50%, transparent 90%);
+  z-index: 1;
+}
+
+.strzalaLewo {
+  position: absolute;
+  align-self: flex-end;
+  left: 10%;
+  width: auto;
+  height: 30%;
+  z-index: 3;
+  transform: translateX(20px);
+}
+.strzalaLewo i{
+  font-size: 800%;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+
+
+.strzalaPrawo {
+  position: absolute;
+  align-self: flex-end;
+  left: 90%;
+  width: auto;
+  height: 30%;
+  z-index: 3;
+}
+.strzalaPrawo i{
+  position: absolute;
+  right: 50%;
+  font-size: 800%;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+i:hover {
+  color: var(--glowny);
+}
+.odbicie {
+  position: absolute;
+  display: flex;
+  left: 55%;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-3deg);
+  z-index: 3;
+  pointer-events: none;
+}
+.strony {
+  position: absolute;
+  bottom: 18%;
+  width: 10%;
+  height: 5%;
+  display: flex;
+  justify-content: space-around;
+  align-self: flex-end;
+  z-index: 2;
+}
+.kropka {
+  width: 25px;
+  height: 25px;
+  border-radius: 22px;
+  background-color: rgba(255, 255, 255, 0.15);
+}
+.opis {
+  width: 500px;
+  height: auto;
+  border-radius: 12px;
+}
+.opis h1{
+  pointer-events: all;
+}
+.opis p{
+  font-size: 20px;
+  font-weight: bold;
+  pointer-events: all;
+}
+.narzedzia {
+  display: flex;
+  align-items: center;
+}
+.opis img{
+  width: 30%;
+  margin-right: 20px;
+}
+.tlo-gradient::before {
+  content: "";
+  position: absolute;
+  bottom: -4%;
+  left: 0;
+  width: 120vw;
+  height: 20vh;
+  background: linear-gradient(to top, var(--glowny), transparent);
+  pointer-events: none;
+  z-index: 2;
+}
+.tlo-gradient::after {
+  content: "";
+  position: absolute;
+  top: -4%;
+  left: 0;
+  width: 120vw;
+  height: 20vh;
+  background: linear-gradient(to top, var(--glowny), transparent);
+  pointer-events: none;
+  z-index: 2;
+  transform: rotate(180deg);
+}
+@media only screen and (max-width: 1100px) {
+.odbicie {
+  left: 50%;
+  width: 80%;
+  height: 100%;
+  transform: translateX(-50%) rotate(-3deg);
+}
+.opis {
+  position: absolute;
+  
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  width: 100%;
+  height: 100%;
+}
+.opis {
+  margin-top: -20%;
+}
+.opis h1{
+  margin: 0px;
+}
+.opis img{
+  width: 40%;
+}
+.strony {
+  width: 40%;
+}
+.strzalaPrawo i,.strzalaLewo i{
+  font-size: 600%;
+}
+.strzalaLewo, .strzalaPrawo{
+  height: 20%;
+}
+}
