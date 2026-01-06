@@ -23,16 +23,11 @@
   width: 120%;
   height: 70%;
   overflow: hidden;
-  /* background-size: cover;
-  background-repeat: no-repeat; */
   transform: rotate(3deg);
   left: -10%;
 }
 .tlo-obraz {
   position: absolute;
-  /* background: url("/BagroundNight.png"); */
-  /* background-size: cover;
-  background-position: center; */
   width: 100%;
   height: 100%;
   filter: blur(5px);
@@ -60,37 +55,25 @@
   background: linear-gradient(to right, white 50%, transparent 90%);
   z-index: 1;
 }
-
-.strzalaLewo {
+.strzalki {
   position: absolute;
-  align-self: flex-end;
-  left: 10%;
-  width: auto;
-  height: 30%;
-  z-index: 3;
-  transform: translateX(20px);
-}
-.strzalaLewo i{
+  bottom: 17%;
+
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
   font-size: 800%;
-  transition: 0.2s ease-in-out;
-  cursor: pointer;
+  z-index: 2;
 }
-
-
-.strzalaPrawo {
-  position: absolute;
-  align-self: flex-end;
-  left: 90%;
-  width: auto;
-  height: 30%;
-  z-index: 3;
+.lewo {
+  transform: rotate(3deg);
+  margin-top: -5%;
 }
-.strzalaPrawo i{
-  position: absolute;
-  right: 50%;
-  font-size: 800%;
+.prawo {
+ transform: rotate(3deg);
+}
+.lewo i, .prawo i{
   transition: 0.2s ease-in-out;
-  cursor: pointer;
 }
 i:hover {
   color: var(--glowny);
@@ -98,7 +81,7 @@ i:hover {
 .odbicie {
   position: absolute;
   display: flex;
-  left: 55%;
+  left: 54%;
   width: 100%;
   height: 100%;
   transform: rotate(-3deg);
@@ -113,13 +96,14 @@ i:hover {
   display: flex;
   justify-content: space-around;
   align-self: flex-end;
-  z-index: 2;
+  z-index: 3;
 }
 .kropka {
   width: 25px;
   height: 25px;
   border-radius: 22px;
   background-color: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
 }
 .opis {
   width: 500px;
@@ -166,6 +150,9 @@ i:hover {
   transform: rotate(180deg);
 }
 @media only screen and (max-width: 1100px) {
+.projektyDev {
+  height: 60%;
+}
 .odbicie {
   left: 50%;
   width: 80%;
@@ -194,10 +181,7 @@ i:hover {
 .strony {
   width: 40%;
 }
-.strzalaPrawo i,.strzalaLewo i{
+.strzalki {
   font-size: 600%;
-}
-.strzalaLewo, .strzalaPrawo{
-  height: 20%;
 }
 }

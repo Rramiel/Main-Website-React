@@ -16,40 +16,6 @@ export default function Projects() {
   const [progress, setProgress] = useState(0);
   let [elapsed, setElapsed] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const sprawdzenie = (dir) => {
-  setLicznik(prev => {
-      const next = prev + dir;
-
-      if (next >= tekst.length) return 0;
-      if (next < 0) return tekst.length - 1;
-
-      return next;
-    });
-  };
-
-  useEffect(() => {
-    let jeden = true;
-    const interval = setInterval(() => {
-      setElapsed(prevElapsed => {
-        const next = prevElapsed + KROK;
-
-        setProgress((next / CZAS) * 100);
-
-        if (next >= CZAS && jeden) {
-          setProgress(0);
-          sprawdzenie(1);
-          jeden = false;
-          return 0;
-        } else {
-          jeden = !jeden;
-        }
-
-        return next;
-      });
-    }, KROK);
-
-    return () => clearInterval(interval);
-  }, [isVisible]);
 
   let tekst = [
     <>
@@ -100,6 +66,44 @@ export default function Projects() {
     </>
   ]
 
+  const sprawdzenie = (dir) => {
+  setLicznik(prev => {
+      const next = prev + dir;
+
+      if (next >= tekst.length) return 0;
+      if (next < 0) return tekst.length - 1;
+
+      return next;
+    });
+  };
+
+  const blokada = useRef(false);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    blokada.current = false;
+
+    const interval = setInterval(() => {
+      setElapsed(prev => {
+        const next = prev + KROK;
+
+        setProgress((next / CZAS) * 100);
+
+        if (next >= CZAS && !blokada.current) {
+          blokada.current = true;
+          sprawdzenie(1);
+          setProgress(0);
+          return 0;
+        }
+
+        return next;
+      });
+    }, KROK);
+
+    return () => clearInterval(interval);
+  }, [isVisible]);
+
   return (
     <>
     <div className="projektyDev">
@@ -135,13 +139,6 @@ export default function Projects() {
 
         <span className='postep' style={{background: `linear-gradient(to right, white ${progress - 10}%, transparent ${progress + 10}%)`}}></span>
 
-        <span className='strzalaLewo'>
-          <i className='fa-solid fa-arrow-left' onClick={() => { sprawdzenie(-1); setElapsed(0);}}></i>
-        </span>
-        <span className='strzalaPrawo'>
-          <i className='fa-solid fa-arrow-right' onClick={() => { sprawdzenie(1); setElapsed(0);}}></i>
-        </span>
-
         <div className='odbicie'>
           <div className='opis'>
             {tekst[licznik]}
@@ -151,11 +148,26 @@ export default function Projects() {
           </div>
         </div>
       </motion.div>
-        {/* <div className='strony'>
-            <div className='kropka'></div>
-            <div className='kropka'></div>
-            <div className='kropka'></div>
-        </div> */}
+        <div className='strony'>
+          {tekst.map((_, i) => (
+            <div
+              key={i}
+              className="kropka"
+              style = {{backgroundColor: licznik == i ? "rgba(255, 255, 255, 0.8)" : "rgba(255, 255, 255, 0.15)", cursor: licznik == i ? "auto" : "pointer"}}
+              onClick={() => setLicznik(i)}
+            >
+              
+            </div>
+          ))}
+        </div>
+        <div className='strzalki'>
+          <span className='lewo'>
+            <i className='fa-solid fa-arrow-left' onClick={() => { sprawdzenie(-1); setElapsed(0);}}></i>
+          </span>
+          <span className='prawo'>
+            <i className='fa-solid fa-arrow-right' onClick={() => { sprawdzenie(1); setElapsed(0);}}></i>
+          </span>
+        </div>
     </div>
     </>
   )
