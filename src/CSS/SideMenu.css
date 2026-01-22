@@ -58,7 +58,6 @@
   height: 100%;
 
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
-  transition: 0.5s ease-in-out;
 
   display: flex;
   justify-content: center;
@@ -74,7 +73,6 @@
   height: 100%;
 
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.1));
-  transition: 0.5s ease-in-out;
 
   display: flex;
   justify-content: center;
@@ -102,8 +100,12 @@
 .linki a:hover{
   color: var(--glowny);
 }
-.strzalkaHidden:hover,
-.strzalkaShow:hover {
+.strzalkaHidden i,
+.strzalkaShow i{
+  transition: 0.3s ease-in-out;
+}
+.strzalkaHidden:hover i,
+.strzalkaShow:hover i {
   color: var(--glowny);
 }
 .nameWebsite {

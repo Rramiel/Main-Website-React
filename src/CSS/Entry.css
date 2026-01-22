@@ -23,7 +23,7 @@
   left: 0;
   width: 100vw;
   height: 30vh;
-  background: linear-gradient(to top, var(--glowny), transparent);
+  background: linear-gradient(to top, var(--glowny), transparent 100%);
   pointer-events: none;
   z-index: 2;
 }
@@ -43,7 +43,6 @@
   font-size: 120px;
   padding: 0px;
   margin: 0px;
-  color: white;
 }
 .sonic {
   overflow: hidden;

@@ -1,10 +1,32 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import '../CSS/SideMenu.css'
 
 export default function SideMenu() {
   const [Extended, setExtended] = useState(false);
   const speedIncrement = 0.15;
   const baseSpeed = 0.5;
+
+  const [visible, setVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  function onScroll() {
+    const currentScrollY = window.scrollY;
+
+    if (currentScrollY > lastScrollY) {
+      setVisible(false);
+    } else {
+      setVisible(true);
+    }
+
+    setLastScrollY(currentScrollY);
+  }
+
+  useEffect(function () {
+    window.addEventListener("scroll", onScroll);
+    return function () {
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [lastScrollY]);
 
   const linksMini = [
     {name: "OMnie", src: "https://helter.ct.ws/?i=1"},
@@ -29,8 +51,8 @@ export default function SideMenu() {
     <>
       <div className='menu' style={{transform: Extended ? "translateX(0%)" : "translateX(-100%)"}}>
 
-          <div className={Extended ? "miniMenuHidden" : "miniMenuShow"}>
-          <div className={Extended ? "strzalkaHidden" : "strzalkaShow"} onClick={Change}>
+          <div className={Extended ? "miniMenuHidden" : "miniMenuShow"} style={{transform: !visible && !Extended ? "translateY(-100px)" : "translateY(0px)"}}>
+          <div className={Extended ? "strzalkaHidden" : "strzalkaShow"} onClick={() =>{Change();setVisible(true);}}>
             <i className={`fa-solid fa-arrow-${Extended ? "left" : "right"}`} id="strzalka"></i>
           </div>
           <div className='linki'>

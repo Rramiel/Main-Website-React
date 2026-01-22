@@ -45,7 +45,7 @@ export default function Projects() {
     <>
     <h1>Flappy Snax 3D</h1>
     <p>Gra stworzona dla żartu, która została wydana na 
-    <a style={{color: "red"}} href="https://rramiel.itch.io/revnel-project"> Itch.io </a> 
+    <a style={{color: "red"}} href="https://rramiel.itch.io/flappy-snax-3d"> Itch.io </a> 
     więc każdy może zagrać w to cudo.
     To zwykły klon Flappy Birda, tyle że w 3D i z głową Snaxa zamiast ptaka.
     Posiada już wszystkie fundamentalne mechaniki, więc jest w pełni grywalna.</p>
@@ -152,8 +152,7 @@ export default function Projects() {
           {tekst.map((_, i) => (
             <div
               key={i}
-              className="kropka"
-              style = {{backgroundColor: licznik == i ? "rgba(255, 255, 255, 0.8)" : "rgba(255, 255, 255, 0.15)", cursor: licznik == i ? "auto" : "pointer"}}
+              className={`kropka ${licznik === i ? "active" : ""}`}
               onClick={() => setLicznik(i)}
             >
               

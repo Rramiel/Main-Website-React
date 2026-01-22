@@ -1,6 +1,6 @@
 .mainContent {
   width: 100%;
-  height: auto;
+  /* height: auto; */
   background-color: var(--glowny);
   display: grid;
   align-items: center;
