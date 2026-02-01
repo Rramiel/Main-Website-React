@@ -24,8 +24,8 @@ export default function Entry() {
 
   useEffect(() => {
     const handleMouseMove = (e) => {
-      const x = (e.clientX / window.innerWidth - 0.5) * 10;
-      const y = (e.clientY / window.innerHeight - 0.5) * 10;
+      const x = (e.clientX / window.innerWidth - 0.5) * 15;
+      const y = (e.clientY / window.innerHeight - 0.5) * 15;
       setBgPosition({ x: 50 + x, y: 50 + y });
     };
 
@@ -33,8 +33,8 @@ export default function Entry() {
       if (window.innerWidth >= 1100) {
         window.addEventListener("mousemove", handleMouseMove);
       } else {
-        window.removeEventListener("mousemove", handleMouseMove);
-        setBgPosition({ x: 50, y: 50 });
+        // window.removeEventListener("mousemove", handleMouseMove);
+        // setBgPosition({ x: 50, y: 50 });
       }
     };
 
@@ -72,10 +72,14 @@ export default function Entry() {
           backgroundImage: `url(${src})`,
           opacity: i === photoIndex ? 1 : 0,
           zIndex: i === photoIndex ? -1 : -2,
-          backgroundPosition: `${bgPosition.x}% ${bgPosition.y}%`,
+          //backgroundPosition: `${bgPosition.x}% ${bgPosition.y}%`,
+          transform: `translateX(${bgPosition.x}px) translateY(${bgPosition.y}px)`
         }}
         />
       ))}
+      <div className='sonic' style={{transform: run ? "translateX(100%)" : "translateX(-300px)",transition: run ? "1s linear" : "0s"}}>
+        <img src={sonic} alt="sonic" />
+      </div>
     </div>
     <div className='informujacy'>
       <div className='napisy'>
@@ -89,9 +93,6 @@ export default function Entry() {
           {t}
           </motion.h1>
         ))}
-      </div>
-      <div className='sonic' style={{transform: run ? "translateX(100%)" : "translateX(-300px)",transition: run ? "1s linear" : "0s"}}>
-        <img src={sonic} alt="sonic" />
       </div>
     </div> 
     </>
