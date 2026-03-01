@@ -1,14 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import { motion } from "framer-motion";
-import '../CSS/Projects.css'
-import { importImagesFrom } from './Entry.jsx'
-import unity from '../assets/Projects/Icon/unity.png'
-import blender from '../assets/Projects/Icon/blender.png'
-import voxel from '../assets/Projects/Icon/MagicalVoxel.png'
+import '../CSS/Dev.css'
+import { importImagesFrom } from './GlobalFunctions.jsx'
+import unity from '../assets/Projects/Dev/Icon/unity.png'
+import blender from '../assets/Projects/Dev/Icon/blender.png'
+import voxel from '../assets/Projects/Dev/Icon/MagicalVoxel.png'
 
 export default function Projects() {
-  const BackGroundProjects = importImagesFrom('BackGroundProjects');
-  const Mascot = importImagesFrom('Mascot');
+  const BackGroundProjects = importImagesFrom('Projects/Dev/BackGround');
+  const Mascot = importImagesFrom('Projects/Dev/Mascot');
   let [licznik, setLicznik] = useState(0);
   const CZAS = 10000; 
   const KROK = 50; 
@@ -16,6 +16,8 @@ export default function Projects() {
   const [progress, setProgress] = useState(0);
   let [elapsed, setElapsed] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+
+  const blokada = useRef(false);
 
   let tekst = [
     <>
@@ -67,17 +69,15 @@ export default function Projects() {
   ]
 
   const sprawdzenie = (dir) => {
-  setLicznik(prev => {
-      const next = prev + dir;
+    blokada.current = false;
 
+    setLicznik(prev => {
+      const next = prev + dir;
       if (next >= tekst.length) return 0;
       if (next < 0) return tekst.length - 1;
-
       return next;
     });
   };
-
-  const blokada = useRef(false);
 
   useEffect(() => {
     if (!isVisible) return;
@@ -92,7 +92,7 @@ export default function Projects() {
 
         if (next >= CZAS && !blokada.current) {
           blokada.current = true;
-          sprawdzenie(1);
+          sprawdzenie(-1);
           setProgress(0);
           return 0;
         }

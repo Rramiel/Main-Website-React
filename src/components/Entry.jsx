@@ -2,17 +2,7 @@ import { useState, useEffect } from 'react'
 import '../CSS/Entry.css'
 import sonic from '../assets/EasterEgg/sonic.gif'
 import { motion } from "framer-motion";
-
-export function importImagesFrom(folder) {
-  const all = {
-    BackGround: import.meta.glob('/src/assets/BackGround/*.{jpg,png,jpeg}', {eager: true}),
-    IconTools: import.meta.glob('/src/assets/IconTools/*.{jpg,png,jpeg,svg,gif}', { eager: true }),
-    BackGroundProjects: import.meta.glob('/src/assets/Projects/BackGroundProjects/*.{jpg,png,jpeg,svg,gif}', { eager: true }),
-    Mascot: import.meta.glob('/src/assets/Projects/Mascot/*.{jpg,png,jpeg,svg,gif}', { eager: true })
-  };
-  const images = all[folder] || {};
-  return Object.values(images).map((modules) => modules.default);
-}
+import { importImagesFrom } from './GlobalFunctions.jsx'
 
 export default function Entry() {
   const images = importImagesFrom('BackGround');

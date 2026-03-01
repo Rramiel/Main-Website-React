@@ -91,14 +91,16 @@ i:hover {
 .strony {
   position: absolute;
   bottom: 18%;
-  width: 10%;
+  width: 15%;
   height: 5%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-self: flex-end;
   z-index: 3;
 }
 .kropka {
+  margin-right: 10px;
+  margin-left: 10px;
   width: 25px;
   height: 25px;
   border-radius: 22px;
@@ -119,7 +121,6 @@ i:hover {
 .opis {
   width: 500px;
   height: auto;
-  border-radius: 12px;
 }
 .opis h1{
   pointer-events: all;

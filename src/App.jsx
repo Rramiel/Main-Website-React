@@ -4,7 +4,8 @@ import './CSS/index.css'
 import Entry from './components/Entry.jsx'
 import Menu from './components/SideMenu.jsx'
 import Content from './components/Content.jsx'
-import Projects from './components/Projects.jsx'
+import Projects from './components/Dev.jsx'
+import Creative from './components/Creative.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -12,5 +13,6 @@ createRoot(document.getElementById('root')).render(
     <Entry />
     <Content />
     <Projects />
+    <Creative />
   </StrictMode>,
 )

@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import '../CSS/Content.css'
-import { importImagesFrom } from './Entry.jsx'
+import { importImagesFrom } from './GlobalFunctions.jsx'
 
 export default function Content() {
   const images = importImagesFrom('IconTools');
@@ -39,18 +39,17 @@ export default function Content() {
           <motion.div className='przesuwacz'>
             {images.map((src, i) => (
               <div className='znacznik' key={i}>
-                <img src={src} alt="" />
+                <img src={src} alt="ikony" />
               </div>
             ))}
             {images.map((src, i) => (
               <div className='znacznik' key={i}>
-                <img src={src} alt="" />
+                <img src={src} alt="ikony" />
               </div>
             ))}
           </motion.div>
       </div>
     </div>
-    {/* <div className='obszar'></div> */}
     </>
   )
 }
