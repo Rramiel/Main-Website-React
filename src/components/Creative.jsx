@@ -4,8 +4,9 @@ import '../CSS/Creative.css'
 import { importImagesFrom } from './GlobalFunctions.jsx'
 
 export default function Creative() {
-  const images = importImagesFrom('Projects/Creative/Icon');
+  const icon = importImagesFrom('Projects/Creative/Icon');
   const BackGroundProjects = importImagesFrom('Projects/Creative/BackGround');
+  const ImagesPrezent = importImagesFrom('Projects/Creative/ImagesPrezent');
 
   let [licznik, setLicznik] = useState(0);
   const CZAS = 10000; 
@@ -19,7 +20,7 @@ export default function Creative() {
 
   let tekst = [
     <>
-    <h1>Photoshop</h1>
+    <h1>Mało</h1>
       <p>Gra inspirowana <span style={{color: "red"}}>SCP-3008. </span>
         <br></br>
         Gdzie musisz uciec z nieskończonego sklepu,
@@ -31,7 +32,7 @@ export default function Creative() {
       </p>
     </>,
     <>
-    <h1>Premiere Pro</h1>
+    <h1>Średnio</h1>
       <p>Dosłowny klon Super Mario Bros.
         <br></br>
         Choć nie udało mi się zrealizować wszystkiego zgodnie z założeniami,
@@ -43,7 +44,7 @@ export default function Creative() {
       </p>
     </>,
     <>
-    <h1>After Effect</h1>
+    <h1>Wysoko</h1>
     <p>Gra stworzona dla żartu, która została wydana na 
     <a style={{color: "red"}} href="https://rramiel.itch.io/flappy-snax-3d"> Itch.io </a> 
     więc każdy może zagrać w to cudo.
@@ -62,6 +63,29 @@ export default function Creative() {
       return next;
     });
   };
+
+  const startIndex = licznik * 3;
+  const endIndex = startIndex + 3;
+
+  
+
+  const [images, setImages] = useState(ImagesPrezent);
+
+  useEffect(() => {
+  setImages(ImagesPrezent);
+  }, [licznik]);
+
+  const handleClick = (globalIndex) => {
+  setImages(prev => {
+    const next = [...prev];
+    const topIndex = startIndex + 2;
+    if (globalIndex === topIndex) return prev;
+
+    [next[topIndex], next[globalIndex]] = [next[globalIndex], next[topIndex]];
+
+    return next;
+  });
+};
 
 
   return (
@@ -91,21 +115,21 @@ export default function Creative() {
             </div>
           </div>
 
-          <div className='imageCreative'>
-            <div className="image" style={{zIndex: "3", backgroundColor: "blue", width: "300px", height: "260px"}}></div>
-            <div className="image" style={{zIndex: "2", backgroundColor: "red", width: "320px", height: "280px"}}></div>
-            <div className="image" style={{zIndex: "1", backgroundColor: "black", width: "330px", height: "300px"}}></div>
+          <div className='imagesCreative'>
+              {images.slice(startIndex, endIndex).map((src, i) => (
+                <img src={src} key={startIndex + i} alt="prace" className="image" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, left: - (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
+              ))}
           </div>
 
         </motion.div>
 
         <div className="lista">
           <div className="programy">
-            {images.map((src, i) => (
-                <img src={src} alt="ikony" onClick={() => setLicznik(i)}/>
+            {icon.map((src, i) => (
+                <img src={src} alt="ikony" key={i} onClick={() => setLicznik(i)}/>
             ))}
             <div className='locationArrow' style={{ left: `calc(70px + ${licznik} * (100px + 20px))` }}>
-              <i class="fa-solid fa-angle-up"></i>
+              <i className="fa-solid fa-angle-up"></i>
             </div>
           </div>
         </div>
