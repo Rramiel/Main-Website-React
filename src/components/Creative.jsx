@@ -90,6 +90,13 @@ export default function Creative() {
               {tekst[licznik]}
             </div>
           </div>
+
+          <div className='imageCreative'>
+            <div className="image" style={{zIndex: "3", backgroundColor: "blue", width: "300px", height: "260px"}}></div>
+            <div className="image" style={{zIndex: "2", backgroundColor: "red", width: "320px", height: "280px"}}></div>
+            <div className="image" style={{zIndex: "1", backgroundColor: "black", width: "330px", height: "300px"}}></div>
+          </div>
+
         </motion.div>
 
         <div className="lista">

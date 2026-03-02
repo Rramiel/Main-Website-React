@@ -22,7 +22,7 @@ export default function Projects() {
   let tekst = [
     <>
     <h1>Revnel Project</h1>
-      <p>Gra inspirowana <span style={{color: "red"}}>SCP-3008. </span>
+      <p>Gra inspirowana <span><a href='https://scp-wiki.wikidot.com/scp-3008' style={{color: "red"}}>SCP-3008.</a></span>
         <br></br>
         Gdzie musisz uciec z nieskończonego sklepu,
         zbierając przedmioty, zanim skończy się czas,
