@@ -2,13 +2,11 @@ import { useState, useEffect, useRef } from 'react'
 import { motion } from "framer-motion";
 import '../CSS/Dev.css'
 import { importImagesFrom } from './GlobalFunctions.jsx'
-import unity from '../assets/Projects/Dev/Icon/unity.png'
-import blender from '../assets/Projects/Dev/Icon/blender.png'
-import voxel from '../assets/Projects/Dev/Icon/MagicalVoxel.png'
 
 export default function Projects() {
   const BackGroundProjects = importImagesFrom('Projects/Dev/BackGround');
   const Mascot = importImagesFrom('Projects/Dev/Mascot');
+  const Icons = importImagesFrom('Projects/Dev/Icon');
   let [licznik, setLicznik] = useState(0);
   const CZAS = 10000; 
   const KROK = 50; 
@@ -55,16 +53,16 @@ export default function Projects() {
   ];
   let narzedzia = [
     <>
-    <img src={unity} alt="unity" />
-    <img src={blender} alt="blender" />
+    <img src={Icons[1]} alt="unity" />
+    <img src={Icons[0]} alt="blender" />
     </>,
     <>
-    <img src={unity} alt="unity" />
-    <img src={voxel} alt="voxel" />
+    <img src={Icons[1]} alt="unity" />
+    <img src={Icons[2]} alt="voxel" />
     </>,
     <>
-    <img src={unity} alt="unity" />
-    <img src={blender} alt="blender" />
+    <img src={Icons[1]} alt="unity" />
+    <img src={Icons[0]} alt="blender" />
     </>
   ]
 
@@ -106,10 +104,10 @@ export default function Projects() {
 
   return (
     <>
-    <div className="projektyDev">
+    <div className="projectDev">
 
       <motion.div 
-        className='tlo'
+        className='backgroundDev'
         key={licznik}
         initial={{ opacity: 0, y:5, rotate:3 }}
         whileInView={{ opacity: 1, y:0 }}
@@ -123,13 +121,13 @@ export default function Projects() {
         onViewportLeave={() => {
         setIsVisible(false);
         }}
-      >
+        >
 
-        <div className="tlo-obraz" style={{background: `url(${BackGroundProjects[licznik]})`, backgroundSize: "cover", backgroundPosition: "center"}}></div>
-        <div className="tlo-gradient"></div>
+        <div className="backgroundImageDev" style={{background: `url(${BackGroundProjects[licznik]})`, backgroundSize: "cover", backgroundPosition: "center"}}></div>
+        <div className="backgroundGradientDev"></div>
         
         <motion.img 
-        className='obraz' src={Mascot[licznik]} alt="maskotka" 
+        className='mascotDev' src={Mascot[licznik]} alt="maskotka" 
         key={licznik}
         initial={{ opacity: 0, y:50, rotate:3 }}
         whileInView={{ opacity: 1, y:5 }}
@@ -137,36 +135,39 @@ export default function Projects() {
         viewport={{ once: false, amount: 0.2 }}
         />
 
-        <span className='postep' style={{background: `linear-gradient(to right, white ${progress - 10}%, transparent ${progress + 10}%)`}}></span>
+        <span className='progressBarDev' style={{background: `linear-gradient(to right, white ${progress - 10}%, transparent ${progress + 10}%)`}}></span>
 
-        <div className='odbicie'>
-          <div className='opis'>
+        <div className='textPlacementDev'>
+          <div className='descriptionDev'>
             {tekst[licznik]}
-            <div className='narzedzia'>
+            <div className='toolsDev'>
               {narzedzia[licznik]}
             </div>
           </div>
         </div>
+
       </motion.div>
-        <div className='strony'>
+
+        <div className='dotsDev'>
           {tekst.map((_, i) => (
             <div
               key={i}
-              className={`kropka ${licznik === i ? "active" : ""}`}
+              className={`dotDev ${licznik === i ? "active" : ""}`}
               onClick={() => setLicznik(i)}
             >
-              
             </div>
           ))}
         </div>
-        <div className='strzalki'>
-          <span className='lewo'>
+
+        <div className='arrowsDev'>
+          <span className='leftArrowDev'>
             <i className='fa-solid fa-arrow-left' onClick={() => { sprawdzenie(-1); setElapsed(0);}}></i>
           </span>
-          <span className='prawo'>
+          <span className='rightArrowDev'>
             <i className='fa-solid fa-arrow-right' onClick={() => { sprawdzenie(1); setElapsed(0);}}></i>
           </span>
         </div>
+        
     </div>
     </>
   )

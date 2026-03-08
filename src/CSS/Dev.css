@@ -1,4 +1,5 @@
-.projektyDev {
+/* Main Style */
+.projectDev {
   position: relative;
   display: flex;
   justify-content: center;
@@ -9,15 +10,7 @@
   align-items: center;
   overflow: hidden;
 }
-.obraz {
-  position: relative;
-  height: 90%;
-  left: 20%;
-  align-self: flex-end;
-  z-index: 1;
-  -webkit-user-drag: none;
-}
-.tlo {
+.backgroundDev {
   position: absolute;
   display: flex;
   width: 120%;
@@ -26,7 +19,7 @@
   transform: rotate(3deg);
   left: -10%;
 }
-.tlo-obraz {
+.backgroundImageDev {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -34,111 +27,19 @@
   z-index: 1;
   overflow: hidden;
 }
-.tlo-obraz::after {
+.backgroundImageDev::after {
   content: "";
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.45);
 }
-.tlo-gradient {
+/* .backgroundGradientDev {
   position: absolute;
   inset: 0;
   z-index: 2;
   pointer-events: none;
-}
-.postep {
-  position: absolute;
-  width: 100%;
-  height: 5%;
-  bottom: 0.1%;
-  align-self: flex-end;
-  background: linear-gradient(to right, white 50%, transparent 90%);
-  z-index: 1;
-}
-.strzalki {
-  position: absolute;
-  bottom: 17%;
-
-  width: 95%;
-  display: flex;
-  justify-content: space-between;
-  font-size: 800%;
-  z-index: 2;
-}
-.lewo {
-  transform: rotate(3deg);
-  margin-top: -5%;
-}
-.prawo {
- transform: rotate(3deg);
-}
-.lewo i, .prawo i{
-  transition: 0.2s ease-in-out;
-}
-i:hover {
-  color: var(--glowny);
-}
-.odbicie {
-  position: absolute;
-  display: flex;
-  left: 54%;
-  width: 100%;
-  height: 100%;
-  transform: rotate(-3deg);
-  z-index: 3;
-  pointer-events: none;
-}
-.strony {
-  position: absolute;
-  bottom: 18%;
-  width: 15%;
-  height: 5%;
-  display: flex;
-  justify-content: center;
-  align-self: flex-end;
-  z-index: 3;
-}
-.kropka {
-  margin-right: 10px;
-  margin-left: 10px;
-  width: 25px;
-  height: 25px;
-  border-radius: 22px;
-  transition: 0.2s ease-in-out;
-  background-color: rgba(255, 255, 255, 0.15);
-  cursor: pointer;
-}
-.kropka.active {
-  cursor: auto;
-  background-color: rgba(255, 255, 255, 0.8);
-}
-.kropka:not(.active):hover {
-  background: color-mix(in srgb, var(--glowny) 40%, transparent);
-}
-.kropka.active:hover{
-  background-color: var(--glowny);
-}
-.opis {
-  width: 500px;
-  height: auto;
-}
-.opis h1{
-  pointer-events: all;
-}
-.opis p{
-  font-size: 20px;
-  font-weight: bold;
-  pointer-events: all;
-}
-.narzedzia {
-  display: flex;
-  align-items: center;
-}
-.opis img{
-  width: 30%;
-  margin-right: 20px;
-}
-.tlo-gradient::before {
+} */
+.backgroundGradientDev::before {
   content: "";
   position: absolute;
   bottom: -4%;
@@ -149,7 +50,7 @@ i:hover {
   pointer-events: none;
   z-index: 2;
 }
-.tlo-gradient::after {
+.backgroundGradientDev::after {
   content: "";
   position: absolute;
   top: -4%;
@@ -161,39 +62,142 @@ i:hover {
   z-index: 2;
   transform: rotate(180deg);
 }
-@media only screen and (max-width: 1100px) {
-.projektyDev {
-  height: 60%;
+/* Other */
+.mascotDev {
+  position: relative;
+  height: 90%;
+  left: 20%;
+  align-self: flex-end;
+  z-index: 1;
+  -webkit-user-drag: none;
 }
-.odbicie {
-  left: 50%;
-  width: 80%;
-  height: 100%;
-  transform: translateX(-50%) rotate(-3deg);
-}
-.opis {
+.progressBarDev {
   position: absolute;
-  
+  width: 100%;
+  height: 5%;
+  bottom: 0.1%;
+  align-self: flex-end;
+  background: linear-gradient(to right, white 50%, transparent 90%);
+  z-index: 1;
+}
+/* Texts */
+.textPlacementDev {
+  position: absolute;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
-
+  left: 54%;
   width: 100%;
   height: 100%;
+  transform: rotate(-3deg);
+  z-index: 2;
+  pointer-events: none;
 }
-.opis {
-  margin-top: -20%;
+.descriptionDev {
+  width: 500px;
+  height: auto;
 }
-.opis h1{
-  margin: 0px;
+.descriptionDev h1{
+  pointer-events: all;
 }
-.opis img{
-  width: 40%;
+.descriptionDev p{
+  font-size: 20px;
+  font-weight: bold;
+  pointer-events: all;
 }
-.strony {
-  width: 40%;
+.toolsDev {
+  display: flex;
+  align-items: center;
 }
-.strzalki {
-  font-size: 600%;
+.toolsDev img{
+  width: 30%;
+  margin-right: 20px;
 }
+/* outside Arrows and dots */
+.arrowsDev {
+  position: absolute;
+  bottom: 17%;
+  width: 95%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 800%;
+  z-index: 2;
+}
+.leftArrowDev {
+  transform: rotate(3deg);
+  margin-top: -5%;
+}
+.rightArrowDev {
+ transform: rotate(3deg);
+}
+.leftArrowDev i, .rightArrowDev i{
+  transition: 0.2s ease-in-out;
+}
+.leftArrowDev i:hover, .rightArrowDev i:hover {
+  color: var(--glowny);
+}
+.dotsDev {
+  position: absolute;
+  bottom: 18%;
+  width: 15%;
+  height: 5%;
+  display: flex;
+  justify-content: center;
+  align-self: flex-end;
+  z-index: 3;
+}
+.dotDev {
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 25px;
+  height: 25px;
+  border-radius: 22px;
+  transition: 0.2s ease-in-out;
+  background-color: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+.dotDev.active {
+  cursor: auto;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+.dotDev:not(.active):hover {
+  background: color-mix(in srgb, var(--glowny) 40%, transparent);
+}
+@media only screen and (max-width: 1100px) {
+  /* Main Style */
+  .projectDev {
+    height: 60%;
+  }
+  /* Other */
+  .mascotDev {
+    filter: brightness(0.7);
+  }
+  /* Texts */
+  .textPlacementDev {
+    left: 50%;
+    width: 80%;
+    height: 100%;
+    transform: translateX(-50%) rotate(-3deg);
+  }
+  .descriptionDev {
+    position: absolute;
+    
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    width: 100%;
+    height: 75%;
+  }
+  .descriptionDev h1{
+    margin: 0px;
+  }
+  .toolsDev img{
+    width: 40%;
+  }
+  /* outside Arrows and dots */
+  .dotsDev {
+    width: 40%;
+  }
+  .arrowsDev {
+    font-size: 600%;
+  }
 }

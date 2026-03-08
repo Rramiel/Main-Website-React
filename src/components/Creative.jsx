@@ -90,7 +90,7 @@ export default function Creative() {
 
   return (
     <>
-      <div className="ProjectsCreative">
+      <div className="projectCreative">
         <motion.div
          className="backgroundCreative"
           key={licznik}
@@ -107,10 +107,11 @@ export default function Creative() {
           // setIsVisible(false);
           }}
          >
-          <div className="backgroundImage" style={{background: `url(${BackGroundProjects[licznik]})`, backgroundSize: "cover", backgroundPosition: "center"}}/>
+          <div className="backgroundImageCreative" style={{background: `url(${BackGroundProjects[licznik]})`, backgroundSize: "cover", backgroundPosition: "center"}}/>
           <div className="backgroundCreativeGradient"></div>
-          <div className="TextCreative">
-            <div className="DescriptionCreative">
+
+          {/* <div className="textPlacementCreative">
+            <div className="descriptionCreative">
               {tekst[licznik]}
             </div>
           </div>
@@ -119,6 +120,21 @@ export default function Creative() {
               {images.slice(startIndex, endIndex).map((src, i) => (
                 <img src={src} key={startIndex + i} alt="prace" className="image" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, left: - (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
               ))}
+          </div> */}
+
+          <div className='placementCreativeElemets'>
+              <div className='left'>
+                <div className="descriptionCreative">
+                  {tekst[licznik]}
+                </div>
+              </div>
+              <div className='right'>
+                <div className='imagesCreative'>
+                  {images.slice(startIndex, endIndex).map((src, i) => (
+                  <img src={src} key={startIndex + i} alt="prace" className="image" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
+                ))}
+                </div>
+              </div>
           </div>
 
         </motion.div>
@@ -128,7 +144,7 @@ export default function Creative() {
             {icon.map((src, i) => (
                 <img src={src} alt="ikony" key={i} onClick={() => setLicznik(i)}/>
             ))}
-            <div className='locationArrow' style={{ left: `calc(70px + ${licznik} * (100px + 20px))` }}>
+            <div className='locationArrow' style={{ left: `calc(80px + ${licznik} * (100px + 20px))` }}>
               <i className="fa-solid fa-angle-up"></i>
             </div>
           </div>
