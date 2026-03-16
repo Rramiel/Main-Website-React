@@ -8,6 +8,20 @@ export default function Creative() {
   const BackGroundProjects = importImagesFrom('Projects/Creative/BackGround');
   const ImagesPrezent = importImagesFrom('Projects/Creative/ImagesPrezent');
 
+  const [isBelow1100, setIsBelow1100] = useState(window.innerWidth < 1100);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsBelow1100(window.innerWidth < 1100);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   let [licznik, setLicznik] = useState(0);
   const CZAS = 10000; 
   const KROK = 50; 
@@ -121,8 +135,9 @@ export default function Creative() {
                 <img src={src} key={startIndex + i} alt="prace" className="image" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, left: - (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
               ))}
           </div> */}
+        </motion.div>
 
-          <div className='placementCreativeElemets'>
+        <div className='placementCreativeElemets'>
               <div className='left'>
                 <div className="descriptionCreative">
                   {tekst[licznik]}
@@ -131,20 +146,18 @@ export default function Creative() {
               <div className='right'>
                 <div className='imagesCreative'>
                   {images.slice(startIndex, endIndex).map((src, i) => (
-                  <img src={src} key={startIndex + i} alt="prace" className="image" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
+                  <img src={src} key={startIndex + i} alt="prace" className="image2" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
                 ))}
                 </div>
               </div>
           </div>
-
-        </motion.div>
 
         <div className="lista">
           <div className="programy">
             {icon.map((src, i) => (
                 <img src={src} alt="ikony" key={i} onClick={() => setLicznik(i)}/>
             ))}
-            <div className='locationArrow' style={{ left: `calc(80px + ${licznik} * (100px + 20px))` }}>
+            <div className='locationArrow' style={{left: isBelow1100 ? `calc(40px + ${licznik} * (80px + 20px))` : `calc(80px + ${licznik} * (100px + 20px))` }}>
               <i className="fa-solid fa-angle-up"></i>
             </div>
           </div>
