@@ -112,6 +112,11 @@
   margin-right: 20px;
 }
 /* outside Arrows and dots */
+.ElementsDev {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
 .arrowsDev {
   position: absolute;
   bottom: 17%;

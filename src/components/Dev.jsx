@@ -14,6 +14,20 @@ export default function Projects() {
   const [progress, setProgress] = useState(0);
   let [elapsed, setElapsed] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [StopTime, setStopTime] = useState(false);
+
+  const floatingUiAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    pointerEvents: "none",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    pointerEvents: "auto",
+  },
+};
 
   const blokada = useRef(false);
 
@@ -84,8 +98,9 @@ export default function Projects() {
 
     const interval = setInterval(() => {
       setElapsed(prev => {
-        const next = prev + KROK;
+        if (StopTime) return prev;
 
+        const next = prev + KROK;
         setProgress((next / CZAS) * 100);
 
         if (next >= CZAS && !blokada.current) {
@@ -94,13 +109,13 @@ export default function Projects() {
           setProgress(0);
           return 0;
         }
-
+        
         return next;
       });
     }, KROK);
 
     return () => clearInterval(interval);
-  }, [isVisible]);
+  }, [isVisible, StopTime]);
 
   return (
     <>
@@ -148,26 +163,38 @@ export default function Projects() {
 
       </motion.div>
 
-        <div className='dotsDev'>
+        <motion.div 
+        className='dotsDev'
+        variants={floatingUiAnimation}
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        transition={{ duration: 0.5, delay: 0.15 }}
+        >
           {tekst.map((_, i) => (
             <div
               key={i}
               className={`dotDev ${licznik === i ? "active" : ""}`}
               onClick={() => setLicznik(i)}
+              onMouseEnter={() => {licznik === i ? setStopTime(false) : setStopTime(true)}} onMouseLeave={() => {setStopTime(false)}}
             >
             </div>
           ))}
-        </div>
+        </motion.div>
 
-        <div className='arrowsDev'>
+        <motion.div className='arrowsDev'
+        variants={floatingUiAnimation}
+        initial="hidden"
+        animate={isVisible ? "visible" : "hidden"}
+        transition={{ duration: 0.5, delay: 0.15 }}
+        >
           <span className='leftArrowDev'>
-            <i className='fa-solid fa-arrow-left' onClick={() => { sprawdzenie(-1); setElapsed(0);}}></i>
+            <i className='fa-solid fa-arrow-left' onClick={() => { sprawdzenie(-1); setElapsed(0);}} onMouseEnter={() => {setStopTime(true)}} onMouseLeave={() => {setStopTime(false)}}></i>
           </span>
           <span className='rightArrowDev'>
-            <i className='fa-solid fa-arrow-right' onClick={() => { sprawdzenie(1); setElapsed(0);}}></i>
+            <i className='fa-solid fa-arrow-right' onClick={() => { sprawdzenie(1); setElapsed(0);}} onMouseEnter={() => {setStopTime(true)}} onMouseLeave={() => {setStopTime(false)}}></i>
           </span>
-        </div>
-        
+        </motion.div>
+
     </div>
     </>
   )

@@ -50,8 +50,6 @@ export default function Creative() {
       <p>Dosłowny klon Super Mario Bros.
         <br></br>
         Choć nie udało mi się zrealizować wszystkiego zgodnie z założeniami,
-        projekt znacznie rozwinął moje umiejętności. Przerwałem nad nim prace
-        z powodu mojego zarządzania kodem. Proces tworzenia
         nagrałem na
         <a style={{color: "red"}} href="https://www.youtube.com/watch?v=KokzE2PPRuQ"> YouTube</a>
         , natomiast samego projektu nie udostępniam ze względu na prawa autorskie.
@@ -153,9 +151,9 @@ export default function Creative() {
           </div>
 
         <div className="lista">
-          <div className="programy">
+          <div className="programy" >
             {icon.map((src, i) => (
-                <img src={src} alt="ikony" key={i} onClick={() => setLicznik(i)}/>
+                <img src={src} alt="ikony" key={i} className={`program ${licznik === i ? "" : "chosen"}`} onClick={() => setLicznik(i)}/>
             ))}
             <div className='locationArrow' style={{left: isBelow1100 ? `calc(40px + ${licznik} * (80px + 20px))` : `calc(80px + ${licznik} * (100px + 20px))` }}>
               <i className="fa-solid fa-angle-up"></i>
