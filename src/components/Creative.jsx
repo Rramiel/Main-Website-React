@@ -34,34 +34,30 @@ export default function Creative() {
 
   let tekst = [
     <>
-    <h1>Mało</h1>
-      <p>Gra inspirowana <span style={{color: "red"}}>SCP-3008. </span>
-        <br></br>
-        Gdzie musisz uciec z nieskończonego sklepu,
-        zbierając przedmioty, zanim skończy się czas,
-        i unikając pracowników. Po upływie czasu zrobi się krwawo.
-        Gra jest dostępna na
-        <a style={{color: "red"}} href="https://rramiel.itch.io/revnel-project"> Itch.io</a>,
-        znajduje się również jej dalszy opis. Nad grą pracuję do tej pory.
+    <h1>Photoshop</h1>
+      <p>
+        Obróbką zdjęć i grafiką komputerową zajmuję się hobbystycznie,
+        tworząc miniaturki na YouTube, grafiki na strony internetowe,
+        plakaty inne projekty dostosowane do konkretnych potrzeb i estetyki.
+        {/* <a style={{color: "red"}} href="https://rramiel.itch.io/revnel-project"> Itch.io</a>, */}
       </p>
     </>,
     <>
-    <h1>Średnio</h1>
-      <p>Dosłowny klon Super Mario Bros.
-        <br></br>
-        Choć nie udało mi się zrealizować wszystkiego zgodnie z założeniami,
-        nagrałem na
-        <a style={{color: "red"}} href="https://www.youtube.com/watch?v=KokzE2PPRuQ"> YouTube</a>
-        , natomiast samego projektu nie udostępniam ze względu na prawa autorskie.
+    <h1>Premiere Pro</h1>
+      <p>
+        Doświadczenie w obróbce wideo zdobyłem podczas prowadzenia własnego
+        kanału na YouTube. Rozwijając swoje umiejętności,
+        przeszedłem od podstawowego montażu do stosowania
+        przejść, efektów wizualnych i dynamiki materiału.
       </p>
     </>,
     <>
-    <h1>Wysoko</h1>
-    <p>Gra stworzona dla żartu, która została wydana na 
-    <a style={{color: "red"}} href="https://rramiel.itch.io/flappy-snax-3d"> Itch.io </a> 
-    więc każdy może zagrać w to cudo.
-    To zwykły klon Flappy Birda, tyle że w 3D i z głową Snaxa zamiast ptaka.
-    Posiada już wszystkie fundamentalne mechaniki, więc jest w pełni grywalna.</p>
+    <h1>After Effects</h1>
+    <p>
+        After Effects poznaję od niedawna, stopniowo rozwijając swoje umiejętności w zakresie
+        animacji i efektów wizualnych. Mimo że wciąż zdobywam doświadczenie,
+        zrealizowałem już w tym programie pierwsze projekty.
+    </p>
     </>
   ];
 
@@ -156,7 +152,7 @@ export default function Creative() {
                 <img src={src} alt="ikony" key={i} className={`program ${licznik === i ? "" : "chosen"}`} onClick={() => setLicznik(i)}/>
             ))}
             <div className='locationArrow' style={{left: isBelow1100 ? `calc(40px + ${licznik} * (80px + 20px))` : `calc(80px + ${licznik} * (100px + 20px))` }}>
-              <i className="fa-solid fa-angle-up"></i>
+              <i className="fa-solid fa-angle-down"></i>
             </div>
           </div>
         </div>

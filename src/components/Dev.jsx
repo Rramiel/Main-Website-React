@@ -91,6 +91,7 @@ export default function Projects() {
     });
   };
 
+  const canHover = window.matchMedia("(hover: hover)").matches;
   useEffect(() => {
     if (!isVisible) return;
 
@@ -98,7 +99,7 @@ export default function Projects() {
 
     const interval = setInterval(() => {
       setElapsed(prev => {
-        if (StopTime) return prev;
+        if (StopTime && canHover) return prev;
 
         const next = prev + KROK;
         setProgress((next / CZAS) * 100);
