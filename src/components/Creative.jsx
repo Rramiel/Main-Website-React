@@ -29,8 +29,22 @@ export default function Creative() {
   const [progress, setProgress] = useState(0);
   let [elapsed, setElapsed] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
+  const [StopTime, setStopTime] = useState(false);
 
   const blokada = useRef(false);
+
+  const floatingUiAnimation = {
+  hidden: {
+    opacity: 0,
+    y: 30,
+    pointerEvents: "none",
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    pointerEvents: "auto",
+  },
+};
 
   let tekst = [
     <>
@@ -45,10 +59,9 @@ export default function Creative() {
     <>
     <h1>Premiere Pro</h1>
       <p>
-        Doświadczenie w obróbce wideo zdobyłem podczas prowadzenia własnego
-        kanału na YouTube. Rozwijając swoje umiejętności,
-        przeszedłem od podstawowego montażu do stosowania
-        przejść, efektów wizualnych i dynamiki materiału.
+        Doświadczenie w obróbce wideo zdobyłem podczas prowadzenia własnego kanału na YouTube.
+        Rozwijając swoje umiejętności, przeszedłem od podstawowego montażu do
+        stosowania przejść, efektów wizualnych i dynamiki filmu.
       </p>
     </>,
     <>
@@ -61,7 +74,7 @@ export default function Creative() {
     </>
   ];
 
-  const sprawdzenie = (dir) => {
+ const sprawdzenie = (dir) => {
     blokada.current = false;
 
     setLicznik(prev => {
@@ -71,6 +84,33 @@ export default function Creative() {
       return next;
     });
   };
+
+  const canHover = window.matchMedia("(hover: hover)").matches;
+  useEffect(() => {
+    if (!isVisible) return;
+
+    blokada.current = false;
+
+    const interval = setInterval(() => {
+      setElapsed(prev => {
+        if (StopTime && canHover) return prev;
+
+        const next = prev + KROK;
+        setProgress((next / CZAS) * 100);
+
+        if (next >= CZAS && !blokada.current) {
+          blokada.current = true;
+          sprawdzenie(-1);
+          setProgress(0);
+          return 0;
+        }
+        
+        return next;
+      });
+    }, KROK);
+
+    return () => clearInterval(interval);
+  }, [isVisible, StopTime]);
 
   const startIndex = licznik * 3;
   const endIndex = startIndex + 3;
@@ -107,28 +147,17 @@ export default function Creative() {
           transition={{ duration: 0.5 }}
           viewport={{ once: false, amount: 0.2 }}
           onViewportEnter={() => {
-          // setIsVisible(true);
-          // setElapsed(0);
-          // setProgress(0);
+          setIsVisible(true);
+          setElapsed(0);
+          setProgress(0);
           }}
           onViewportLeave={() => {
-          // setIsVisible(false);
+          setIsVisible(false);
           }}
          >
           <div className="backgroundImageCreative" style={{background: `url(${BackGroundProjects[licznik]})`, backgroundSize: "cover", backgroundPosition: "center"}}/>
           <div className="backgroundCreativeGradient"></div>
-
-          {/* <div className="textPlacementCreative">
-            <div className="descriptionCreative">
-              {tekst[licznik]}
-            </div>
-          </div>
-
-          <div className='imagesCreative'>
-              {images.slice(startIndex, endIndex).map((src, i) => (
-                <img src={src} key={startIndex + i} alt="prace" className="image" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, left: - (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
-              ))}
-          </div> */}
+          <span className='progressBarCreative' style={{background: `linear-gradient(to right, white ${progress - 10}%, transparent ${progress + 10}%)`}}></span>
         </motion.div>
 
         <div className='placementCreativeElemets'>
@@ -138,24 +167,36 @@ export default function Creative() {
                 </div>
               </div>
               <div className='right'>
-                <div className='imagesCreative'>
+                <motion.div 
+                className='imagesCreative'
+                variants={floatingUiAnimation}
+                initial="hidden"
+                animate={isVisible ? "visible" : "hidden"}
+                transition={{ duration: 0.5, delay: 0.15 }}
+                >
                   {images.slice(startIndex, endIndex).map((src, i) => (
                   <img src={src} key={startIndex + i} alt="prace" className="image2" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
                 ))}
-                </div>
+                </motion.div>
               </div>
           </div>
 
-        <div className="lista">
+        <motion.div
+         className="lista"
+         variants={floatingUiAnimation}
+         initial="hidden"
+         animate={isVisible ? "visible" : "hidden"}
+         transition={{ duration: 0.5, delay: 0.15 }}
+         >
           <div className="programy" >
             {icon.map((src, i) => (
-                <img src={src} alt="ikony" key={i} className={`program ${licznik === i ? "" : "chosen"}`} onClick={() => setLicznik(i)}/>
+                <img src={src} alt="ikony" key={i} className={`program ${licznik === i ? "" : "chosen"}`} onClick={() => setLicznik(i)} onMouseEnter={() => {setStopTime(true)}} onMouseLeave={() => {setStopTime(false)}}/>
             ))}
             <div className='locationArrow' style={{left: isBelow1100 ? `calc(40px + ${licznik} * (80px + 20px))` : `calc(80px + ${licznik} * (100px + 20px))` }}>
               <i className="fa-solid fa-angle-down"></i>
             </div>
           </div>
-        </div>
+        </motion.div>
         
       </div>
     </>
