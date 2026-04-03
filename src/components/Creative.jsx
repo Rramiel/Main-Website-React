@@ -158,28 +158,33 @@ export default function Creative() {
           <div className="backgroundImageCreative" style={{background: `url(${BackGroundProjects[licznik]})`, backgroundSize: "cover", backgroundPosition: "center"}}/>
           <div className="backgroundCreativeGradient"></div>
           <span className='progressBarCreative' style={{background: `linear-gradient(to right, white ${progress - 10}%, transparent ${progress + 10}%)`}}></span>
-        </motion.div>
 
-        <div className='placementCreativeElemets'>
+          <div className='placementCreativeElemets'>
               <div className='left'>
                 <div className="descriptionCreative">
                   {tekst[licznik]}
                 </div>
               </div>
               <div className='right'>
-                <motion.div 
-                className='imagesCreative'
-                variants={floatingUiAnimation}
-                initial="hidden"
-                animate={isVisible ? "visible" : "hidden"}
-                transition={{ duration: 0.5, delay: 0.15 }}
-                >
+                <div className='imagesCreative'>
                   {images.slice(startIndex, endIndex).map((src, i) => (
-                  <img src={src} key={startIndex + i} alt="prace" className="image2" onClick={() => handleClick(startIndex + i)} style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
+                  <motion.img
+                  key={startIndex + i}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: (images.slice(startIndex, endIndex).length - i - 1) * 0.2 + 0.2, duration: 0.5 }}
+                  viewport={{ once: false, amount: 0.3 }}
+                  
+                  src={src}  alt="prace" className="image2"
+                  onClick={() => handleClick(startIndex + i)}
+                  style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
                 ))}
-                </motion.div>
+                </div>
               </div>
           </div>
+        </motion.div>
+
+        
 
         <motion.div
          className="lista"
