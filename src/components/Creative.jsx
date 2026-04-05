@@ -170,9 +170,9 @@ export default function Creative() {
                   {images.slice(startIndex, endIndex).map((src, i) => (
                   <motion.img
                   key={startIndex + i}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: (images.slice(startIndex, endIndex).length - i - 1) * 0.2 + 0.2, duration: 0.5 }}
+                  initial={{  y: "50vh", opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: (images.slice(startIndex, endIndex).length - i - 1) * 0.2 + 0.2, duration: 0.7, ease: "easeOut" }}
                   viewport={{ once: false, amount: 0.3 }}
                   
                   src={src}  alt="prace" className="image2"

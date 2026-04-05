@@ -135,6 +135,7 @@
 }
 .leftArrowDev i, .rightArrowDev i{
   transition: 0.2s ease-in-out;
+  cursor: pointer;
 }
 .leftArrowDev i:hover, .rightArrowDev i:hover {
   color: var(--glowny);
