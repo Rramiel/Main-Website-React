@@ -1,24 +1,25 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect} from 'react'
 import '../CSS/Look.css'
-import { GlobalContext } from "./GlobalState";
 import { importImagesFrom } from './GlobalFunctions.jsx'
+import { useStore } from "./Store.jsx";
 
 export default function Look() {
     const BackGroundProjects = importImagesFrom('Projects/Creative/ImagesPrezent');
-    const { jakiObrazLook, setJakiObrazLook } = useContext(GlobalContext);
+    const jakiObrazLook = useStore((s) => s.jakiObrazLook);
+    const setJakiObrazLook = useStore((s) => s.setJakiObrazLook);
     const [widocznosc, setwidocznosc] = useState(false)
 
     useEffect(() => {
-        setwidocznosc(true);
+        if (jakiObrazLook != null) {
+            setwidocznosc(true);
+        }
     }, [jakiObrazLook]);
 
     const sprawdzenie = (dir) => {
-    setJakiObrazLook(prev => {
-      const next = prev + dir;
-      if (next >= BackGroundProjects.length) return 0;
-      if (next < 0) return BackGroundProjects.length - 1;
-      return next;
-    });
+    const next =
+        (jakiObrazLook + dir + BackGroundProjects.length) %
+        BackGroundProjects.length;
+        setJakiObrazLook(next);
     };
 
     return (
