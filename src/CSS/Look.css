@@ -1,0 +1,46 @@
+.menuZdjeciowe {
+    position: fixed;
+    display: flex;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 5;
+}
+.powrot {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 6;
+}
+.wystawione {
+  max-width: 90%;
+  max-height: 80%;
+  height: auto;
+  display: block;
+  border-radius: 12px;
+  -webkit-user-drag: none;
+  z-index: 7;
+}
+.arrowsLook {
+  font-size: 800%;
+  z-index: 8;
+}
+.leftArrowLook ,.rightArrowLook{
+  position: absolute;
+  display: flex;
+  align-items: start;
+  transition: 0.2s ease-in-out;
+  cursor: pointer;
+}
+.leftArrowLook {
+  left: 20px;
+}
+.rightArrowLook {
+  right: 20px;
+}
+.leftArrowLook i:hover, .rightArrowLook i:hover {
+  color: var(--glowny);
+}

@@ -1,12 +1,15 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { motion } from "framer-motion"
 import '../CSS/Creative.css'
+import { GlobalContext } from "./GlobalState";
 import { importImagesFrom } from './GlobalFunctions.jsx'
 
 export default function Creative() {
   const icon = importImagesFrom('Projects/Creative/Icon');
   const BackGroundProjects = importImagesFrom('Projects/Creative/BackGround');
   const ImagesPrezent = importImagesFrom('Projects/Creative/ImagesPrezent');
+
+  const { setJakiObrazLook } = useContext(GlobalContext);
 
   const [isBelow1100, setIsBelow1100] = useState(window.innerWidth < 1100);
 
@@ -170,8 +173,8 @@ export default function Creative() {
                   {images.slice(startIndex, endIndex).map((src, i) => (
                   <motion.img
                   key={startIndex + i}
-                  initial={{  y: "50vh", opacity: 0 }}
-                  animate={{ y: 0, opacity: 1 }}
+                  initial={{  x: "50vw", opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: (images.slice(startIndex, endIndex).length - i - 1) * 0.2 + 0.2, duration: 0.7, ease: "easeOut" }}
                   viewport={{ once: false, amount: 0.3 }}
                   
@@ -188,7 +191,6 @@ export default function Creative() {
 
         <motion.div
          className="lista"
-         variants={floatingUiAnimation}
          initial="hidden"
          animate={isVisible ? "visible" : "hidden"}
          transition={{ duration: 0.5, delay: 0.15 }}
