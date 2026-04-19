@@ -15,18 +15,25 @@ export default function Look() {
         }
     }, [jakiObrazLook]);
 
-    const sprawdzenie = (dir) => {
-    const next =
-        (jakiObrazLook + dir + BackGroundProjects.length) %
-        BackGroundProjects.length;
-        setJakiObrazLook(next);
-    };
+        const sprawdzenie = (dir) => {
+  const currentIndex = jakiObrazLook.index;
+
+  const nextIndex =
+    (currentIndex + dir + BackGroundProjects.length) %
+    BackGroundProjects.length;
+
+  setJakiObrazLook({
+    src: BackGroundProjects[nextIndex],
+    index: nextIndex,
+    key: Date.now()
+  });
+};
 
     return (
         <>
             <div className='menuZdjeciowe' style={{display: widocznosc ? "flex" : "none"}}>
                 <div className='powrot' onClick={() => setwidocznosc(prev => !prev)}></div>
-                <img className='wystawione' src={BackGroundProjects[jakiObrazLook]} alt="ss" onClick={(e) => e.stopPropagation()} />
+                <img className='wystawione' src={jakiObrazLook?.src} alt="praca" onClick={(e) => e.stopPropagation()} />
 
                 <div className='arrowsLook'>
                     <span className='leftArrowLook'>

@@ -3,11 +3,13 @@ import { motion } from "framer-motion"
 import '../CSS/Creative.css'
 import { importImagesFrom } from './GlobalFunctions.jsx'
 import { useStore } from "./Store.jsx";
+import { div } from 'framer-motion/client';
 
 export default function Creative() {
   const icon = importImagesFrom('Projects/Creative/Icon');
   const BackGroundProjects = importImagesFrom('Projects/Creative/BackGround');
   const ImagesPrezent = importImagesFrom('Projects/Creative/ImagesPrezent');
+  const photoshop = importImagesFrom('Projects/Creative/Photoshop');
 
   const [isBelow1100, setIsBelow1100] = useState(window.innerWidth < 1100);
 
@@ -121,26 +123,27 @@ export default function Creative() {
   const [images, setImages] = useState(ImagesPrezent);
   const setJakiObrazLook = useStore((s) => s.setJakiObrazLook);
 
-  useEffect(() => {
-    setImages(ImagesPrezent);
-    }, [licznik]);
-
-    const handleClick = (globalIndex) => {
+  const handleClick = (globalIndex) => {
+  setImages(prev => {
+    const next = [...prev];
     const topIndex = startIndex + 2;
 
-    if (globalIndex == topIndex) {
-      return;
+    if (globalIndex === topIndex) {
+      const clickedSrc = next[globalIndex];
+      setJakiObrazLook({
+      src: images[globalIndex],
+      index: globalIndex,
+      key: Date.now() // 🔥 ważne
+    });
+      return prev;
     }
 
-    setImages(prev => {
-      const next = [...prev];
+    [next[topIndex], next[globalIndex]] =
+      [next[globalIndex], next[topIndex]];
 
-      [next[topIndex], next[globalIndex]] = [next[globalIndex], next[topIndex]];
-
-      return next;
-    });
-  };
-
+    return next;
+  });
+};
 
   return (
     <>
@@ -172,10 +175,38 @@ export default function Creative() {
                 </div>
               </div>
               <div className='right'>
-                <div className='imagesCreative'>
+                <div className='highlightedCreative'>
+                  {images.slice(startIndex, endIndex).map((src, i) => (
+                  <motion.div
+                   className='CreativePlaceProject'
+                   key={src}
+                   initial={{  x: isBelow1100 ? "100vw" : "60vw"}}
+                   animate={{ x: 0}}
+                   transition={{ delay: (images.slice(startIndex, endIndex).length - i - 1) * 0.2 + 0.2, duration: 0.7, ease: "easeOut" }}
+                   style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}
+                   viewport={{ once: false, amount: 0.3 }}
+                   onMouseEnter={() => {setStopTime(true)}} 
+                   onMouseLeave={() => {setStopTime(false)}}
+                   onClick={() => handleClick(startIndex + i)}>
+
+                    <motion.div 
+                     className='workCreative'
+                     key={src + (startIndex + i)}
+                     initial={{  scale: 0.9}}
+                     animate={{ scale: 1}}
+                     transition={{duration: 0.5, ease: "easeOut"}}
+                     style={{backgroundImage: `url(${src})`}}
+                     onClick={() => console.log(src + (startIndex + i))}>
+
+                    </motion.div>
+                    {/* <iframe  src="https://www.youtube.com/embed/KokzE2PPRuQ?si=dW-mYlrBPcymWpzr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
+
+                  </motion.div>
+                  ))}
+{/* 
                   {images.slice(startIndex, endIndex).map((src, i) => (
                   <motion.img
-                  key={startIndex + i}
+                  key={src + i}
                   initial={{  x: "50vw", opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: (images.slice(startIndex, endIndex).length - i - 1) * 0.2 + 0.2, duration: 0.7, ease: "easeOut" }}
@@ -186,7 +217,7 @@ export default function Creative() {
                   onMouseLeave={() => {setStopTime(false)}}
                   onClick={() => handleClick(startIndex + i)}
                   style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
-                ))}
+                ))} */}
                 </div>
               </div>
           </div>
@@ -204,8 +235,8 @@ export default function Creative() {
             {icon.map((src, i) => (
                 <img src={src} alt="ikony" key={i} 
                 className={`program ${licznik === i ? "" : "chosen"}`} 
-                onClick={() => setLicznik(i)} 
-                onMouseEnter={() => {setStopTime(true)}} 
+                onClick={() => {setLicznik(i); setStopTime(false);}} 
+                onMouseEnter={() => {licznik === i ? setStopTime(false) : setStopTime(true)}} 
                 onMouseLeave={() => {setStopTime(false)}}/>
             ))}
             <div className='locationArrow' style={{left: isBelow1100 ? `calc(40px + ${licznik} * (80px + 20px))` : `calc(80px + ${licznik} * (100px + 20px))` }}>

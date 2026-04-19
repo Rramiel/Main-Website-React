@@ -44,3 +44,12 @@
 .leftArrowLook i:hover, .rightArrowLook i:hover {
   color: var(--glowny);
 }
+@media only screen and (max-width: 1100px) {
+  .arrowsLook {
+    font-size: 600%;
+  }
+  .leftArrowLook ,.rightArrowLook{
+    position: absolute;
+    top: 80%;
+  }
+}

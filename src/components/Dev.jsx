@@ -175,8 +175,9 @@ export default function Projects() {
             <div
               key={i}
               className={`dotDev ${licznik === i ? "active" : ""}`}
-              onClick={() => setLicznik(i)}
-              onMouseEnter={() => {licznik === i ? setStopTime(false) : setStopTime(true)}} onMouseLeave={() => {setStopTime(false)}}
+              onClick={() => {setLicznik(i); setStopTime(false)}}
+              onMouseEnter={() => {licznik === i ? setStopTime(false) : setStopTime(true)}}
+              onMouseLeave={() => {setStopTime(false)}}
             >
             </div>
           ))}
