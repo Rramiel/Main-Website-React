@@ -133,7 +133,7 @@ export default function Creative() {
       setJakiObrazLook({
       src: images[globalIndex],
       index: globalIndex,
-      key: Date.now() // 🔥 ważne
+      key: Date.now()
     });
       return prev;
     }
@@ -227,6 +227,7 @@ export default function Creative() {
 
         <motion.div
          className="lista"
+         variants={floatingUiAnimation}
          initial="hidden"
          animate={isVisible ? "visible" : "hidden"}
          transition={{ duration: 0.5, delay: 0.15 }}

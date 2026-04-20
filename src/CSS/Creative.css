@@ -140,6 +140,7 @@
   position: absolute;
   height: 310px;
   width: 530px;
+  transition: margin-top 0.5s ease-out;
 }
 .workCreative {
   width: 100%;
@@ -148,6 +149,10 @@
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 22px;
+  cursor: pointer;
+}
+.CreativePlaceProject:not(:nth-child(3)):hover {
+  margin-top: -10px;
 }
 .image2 {
   position: absolute;
