@@ -1,0 +1,46 @@
+.footer {
+    position: relative;
+    width: 100%;
+    height: 20%;
+    background-color: var(--glowny);
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+.footer div{
+    width: 33%;
+    height: 100%;
+}
+.backToUp {
+    text-align: center;
+    font-weight: bold;
+    font-size: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+}
+.backToUp p{
+    cursor: pointer;
+}
+.backToUp i{
+    position: absolute;
+    bottom: 10%;
+    font-size: 300%;
+    cursor: pointer;
+}
+.copyright {
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: column;
+}
+.copyright p{
+    margin: 2px;
+}
+ @keyframes arow {
+  0%  {margin-bottom: 10px;}
+  50% {margin-bottom: 20px;}
+  100% {margin-bottom: 10px;}
+ }

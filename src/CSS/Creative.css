@@ -204,8 +204,8 @@
   width: 100px;
   height: 100px;
   -webkit-user-drag: none;
-  transition: margin-top 0.5s ease-in-out;
-  user-drag: none;
+  transition: margin-top 3s ease-in-out;
+  /* user-drag: none; */
 }
 .program.chosen:hover {
   margin-top: -10px;

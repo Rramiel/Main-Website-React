@@ -7,6 +7,7 @@ import Content from './components/Content.jsx'
 import Projects from './components/Dev.jsx'
 import Creative from './components/Creative.jsx'
 import Look from './components/Look.jsx'
+import Footer from './components/Footer.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,5 +17,6 @@ createRoot(document.getElementById('root')).render(
     <Content />
     <Projects />
     <Creative />
+    <Footer />
   </StrictMode>,
 )
