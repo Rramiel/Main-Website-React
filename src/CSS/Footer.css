@@ -6,6 +6,11 @@
     color: white;
     display: flex;
     justify-content: center;
+    align-items: end;
+}
+.footer svg {
+    position: absolute;
+    z-index: 0;
 }
 .footer div{
     width: 33%;
@@ -44,3 +49,32 @@
   50% {margin-bottom: 20px;}
   100% {margin-bottom: 10px;}
  }
+ .wave-inner {
+  animation: waveMove linear infinite;
+  will-change: transform;
+}
+.wave1 path {
+  fill: #ffffff;
+  opacity: 0.6;
+}
+
+.wave2 path {
+  fill: #ffd1dc;
+  opacity: 0.4;
+}
+
+
+/* różne prędkości */
+.wave1 .wave-inner { animation-duration: 12s; opacity: 0.5; fill: #fff; }
+.wave2 .wave-inner { animation-duration: 18s; opacity: 0.3; fill: #fff; }
+.wave3 .wave-inner { animation-duration: 25s; opacity: 0.2; fill: #fff; }
+
+/* 🔑 klucz: dokładnie 1440px = połowa całości */
+@keyframes waveMove {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-1440px);
+  }
+}
