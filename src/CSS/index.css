@@ -31,10 +31,10 @@
   background: #1e1e1e;  
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(170, 68, 121);
+  background: rgb(70, 70, 70);
   border-radius: 23px;
-  border: 1px solid #1e1e1e;
-  box-shadow: inset 0 0 6px var(--glowny);
+  /* border: 1px solid #1e1e1e; */
+  /* box-shadow: inset 0 0 6px var(--glowny); */
 }
 
 /* ::-webkit-scrollbar-thumb:hover {

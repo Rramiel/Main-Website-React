@@ -9,7 +9,7 @@ export default function Footer() {
     return (
         <>
             <div className="footer">
-                <span className='wave'>
+                <div className='wave'>
                     <svg viewBox="0 0 1440 200" preserveAspectRatio="none">
                         <defs>
                         <linearGradient id="waveGradient" x1="0" y1="0" x2="0" y2="1">
@@ -41,18 +41,24 @@ export default function Footer() {
                         </g>
                         </g>
                     </svg>
-                    <span className='waveBaground'></span>
-                </span>
-                <div></div>
-                <div className='backToUp'>
-                    <i onClick={scrollToTop} className="fa-solid fa-angle-up" style={{animation: "arow 3s ease-in-out infinite"}}></i>
-                    <p onClick={scrollToTop}>Powrót do góry</p>
                 </div>
-                <div className='copyright'>
-                    <p>©2026 Mikołaj</p>
-                    <p>Z pasji do kodu</p>
-                    <p>Strona stworzona za pomocą react</p>
-                </div>
+                <span className='waveBaground'>
+                        <div className='copyright'>
+                            <strong>©2026 Mikołaj</strong>
+                            <p> Z pasji do kodu. Strona stworzona za pomocą <strong>React.</strong></p>
+                        </div>
+                        <div className='backToUp'>
+                            <i onClick={scrollToTop} className="fa-solid fa-angle-up"></i>
+                            <p onClick={scrollToTop}>Powrót do góry</p>
+                        </div>
+                        <div className='socialPlace'>
+                            <div className='social'>
+                                <a href="https://helter.ct.ws/?i=1"><i class="fa-brands fa-github"></i></a>
+                                <a href="https://helter.ct.ws/?i=1"><i class="fa-brands fa-itch-io"></i></a>
+                                <a href="https://helter.ct.ws/?i=1"><i class="fa-brands fa-youtube"></i></a>
+                            </div>
+                        </div>
+                    </span>
             </div>
         </>
     )
