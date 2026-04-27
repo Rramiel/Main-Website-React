@@ -27,6 +27,15 @@
   position: relative;
   z-index: -1;
 }
+.page::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(20px);
+  z-index: -1;
+  
+  mask-image: linear-gradient(to top, white 5%, transparent 30%);
+}
 .page::before {
   content: "";
   position: absolute;
@@ -36,7 +45,8 @@
   height: 30vh;
   background: linear-gradient(to top, var(--glowny), transparent 100%);
   pointer-events: none;
-  z-index: 2;
+  inset: 1;
+  z-index: 1;
 }
 .wstawki {
   width: 100%;
@@ -49,6 +59,7 @@
   right: 0%;
   bottom: 0%;
   text-align: end;
+  z-index: 1;
 }
 .napisy h1{
   font-size: 120px;

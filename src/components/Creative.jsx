@@ -34,6 +34,10 @@ export default function Creative() {
   const [isVisible, setIsVisible] = useState(false);
   const [StopTime, setStopTime] = useState(false);
 
+  const lastTimeRef = useRef(null);
+  const rafRef = useRef(null);
+  const stopTimeRef = useRef(false);
+
   const blokada = useRef(false);
 
   const floatingUiAnimation = {
@@ -89,61 +93,75 @@ export default function Creative() {
   };
 
   const canHover = window.matchMedia("(hover: hover)").matches;
+
+  useEffect(() => {
+    stopTimeRef.current = StopTime;
+  }, [StopTime]);
+
   useEffect(() => {
     if (!isVisible) return;
 
     blokada.current = false;
+    lastTimeRef.current = null;
 
-    const interval = setInterval(() => {
+    const loop = (time) => {
+      if (!lastTimeRef.current) lastTimeRef.current = time;
+
+      const delta = time - lastTimeRef.current;
+      lastTimeRef.current = time;
+
       setElapsed(prev => {
-        if (StopTime && canHover) return prev;
+        if (stopTimeRef.current && canHover) return prev;
 
-        const next = prev + KROK;
+        const next = prev + delta;
         setProgress((next / CZAS) * 100);
 
-        if (next >= CZAS && !blokada.current) {
-          blokada.current = true;
-          sprawdzenie(-1);
-          setProgress(0);
-          return 0;
+        if (next >= CZAS) {
+          if (!blokada.current) {
+            blokada.current = true;
+            sprawdzenie(-1);
+          }
+          return prev;
         }
-        
+
         return next;
       });
-    }, KROK);
 
-    return () => clearInterval(interval);
-  }, [isVisible, StopTime]);
+      rafRef.current = requestAnimationFrame(loop);
+    };
+
+    rafRef.current = requestAnimationFrame(loop);
+
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [isVisible]);
 
   const startIndex = licznik * 3;
   const endIndex = startIndex + 3;
-
-  
 
   const [images, setImages] = useState(ImagesPrezent);
   const setJakiObrazLook = useStore((s) => s.setJakiObrazLook);
 
   const handleClick = (globalIndex) => {
-  setImages(prev => {
-    const next = [...prev];
-    const topIndex = startIndex + 2;
+    setImages(prev => {
+      const next = [...prev];
+      const topIndex = startIndex + 2;
 
-    if (globalIndex === topIndex) {
-      const clickedSrc = next[globalIndex];
-      setJakiObrazLook({
-      src: images[globalIndex],
-      index: globalIndex,
-      key: Date.now()
+      if (globalIndex === topIndex) {
+        const clickedSrc = next[globalIndex];
+        setJakiObrazLook({
+        src: images[globalIndex],
+        index: globalIndex,
+        key: Date.now()
+      });
+        return prev;
+      }
+
+      [next[topIndex], next[globalIndex]] =
+        [next[globalIndex], next[topIndex]];
+
+      return next;
     });
-      return prev;
-    }
-
-    [next[topIndex], next[globalIndex]] =
-      [next[globalIndex], next[topIndex]];
-
-    return next;
-  });
-};
+  };
 
   return (
     <>
@@ -199,25 +217,8 @@ export default function Creative() {
                      onClick={() => console.log(src + (startIndex + i))}>
 
                     </motion.div>
-                    {/* <iframe  src="https://www.youtube.com/embed/KokzE2PPRuQ?si=dW-mYlrBPcymWpzr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> */}
-
                   </motion.div>
                   ))}
-{/* 
-                  {images.slice(startIndex, endIndex).map((src, i) => (
-                  <motion.img
-                  key={src + i}
-                  initial={{  x: "50vw", opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: (images.slice(startIndex, endIndex).length - i - 1) * 0.2 + 0.2, duration: 0.7, ease: "easeOut" }}
-                  viewport={{ once: false, amount: 0.3 }}
-                  
-                  src={src}  alt="prace" className="image2"
-                  onMouseEnter={() => {setStopTime(true)}} 
-                  onMouseLeave={() => {setStopTime(false)}}
-                  onClick={() => handleClick(startIndex + i)}
-                  style={{zIndex: i + 1, right: (2 + i * 4) + "vw", top: (2 + i * 4) + "vh"}}/>
-                ))} */}
                 </div>
               </div>
           </div>

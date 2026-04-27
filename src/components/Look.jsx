@@ -15,19 +15,19 @@ export default function Look() {
         }
     }, [jakiObrazLook]);
 
-        const sprawdzenie = (dir) => {
-  const currentIndex = jakiObrazLook.index;
+  const sprawdzenie = (dir) => {
+        const currentIndex = jakiObrazLook.index;
 
-  const nextIndex =
-    (currentIndex + dir + BackGroundProjects.length) %
-    BackGroundProjects.length;
+        const nextIndex =
+            (currentIndex + dir + BackGroundProjects.length) %
+            BackGroundProjects.length;
 
-  setJakiObrazLook({
-    src: BackGroundProjects[nextIndex],
-    index: nextIndex,
-    key: Date.now()
-  });
-};
+        setJakiObrazLook({
+            src: BackGroundProjects[nextIndex],
+            index: nextIndex,
+            key: Date.now()
+        });
+    };
 
     return (
         <>
@@ -39,13 +39,11 @@ export default function Look() {
                     <span className='leftArrowLook'>
                         <i className='fa-solid fa-arrow-left' 
                         onClick={() => { sprawdzenie(-1);}} 
-                        // onMouseEnter={() => {setStopTime(true)}} onMouseLeave={() => {setStopTime(false)}}
                         ></i>
                     </span>
                     <span className='rightArrowLook'>
                         <i className='fa-solid fa-arrow-right' 
                         onClick={() => { sprawdzenie(1);}} 
-                        // onMouseEnter={() => {setStopTime(true)}} onMouseLeave={() => {setStopTime(false)}}
                         ></i>
                     </span>
                 </div>

@@ -16,6 +16,10 @@ export default function Projects() {
   const [isVisible, setIsVisible] = useState(false);
   const [StopTime, setStopTime] = useState(false);
 
+  const lastTimeRef = useRef(null);
+  const rafRef = useRef(null);
+  const stopTimeRef = useRef(false);
+
   const floatingUiAnimation = {
   hidden: {
     opacity: 0,
@@ -92,31 +96,47 @@ export default function Projects() {
   };
 
   const canHover = window.matchMedia("(hover: hover)").matches;
+
+  useEffect(() => {
+    stopTimeRef.current = StopTime;
+  }, [StopTime]);
+
   useEffect(() => {
     if (!isVisible) return;
 
     blokada.current = false;
+    lastTimeRef.current = null;
 
-    const interval = setInterval(() => {
+    const loop = (time) => {
+      if (!lastTimeRef.current) lastTimeRef.current = time;
+
+      const delta = time - lastTimeRef.current;
+      lastTimeRef.current = time;
+
       setElapsed(prev => {
-        if (StopTime && canHover) return prev;
+        if (stopTimeRef.current && canHover) return prev;
 
-        const next = prev + KROK;
+        const next = prev + delta;
         setProgress((next / CZAS) * 100);
 
-        if (next >= CZAS && !blokada.current) {
-          blokada.current = true;
-          sprawdzenie(-1);
-          setProgress(0);
-          return 0;
+        if (next >= CZAS) {
+          if (!blokada.current) {
+            blokada.current = true;
+            sprawdzenie(-1);
+          }
+          return prev;
         }
-        
+
         return next;
       });
-    }, KROK);
 
-    return () => clearInterval(interval);
-  }, [isVisible, StopTime]);
+      rafRef.current = requestAnimationFrame(loop);
+    };
+
+    rafRef.current = requestAnimationFrame(loop);
+
+    return () => cancelAnimationFrame(rafRef.current);
+  }, [isVisible]);
 
   return (
     <>
