@@ -10,7 +10,7 @@ import Look from './components/Look.jsx'
 import Footer from './components/Footer.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+  <>
     <Look />
     <Menu />
     <Entry />
@@ -18,5 +18,5 @@ createRoot(document.getElementById('root')).render(
     <Projects />
     <Creative />
     <Footer />
-  </StrictMode>,
+  </>,
 )
